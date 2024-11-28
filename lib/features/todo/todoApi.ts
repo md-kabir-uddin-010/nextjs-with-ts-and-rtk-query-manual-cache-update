@@ -1,21 +1,15 @@
 import { apiSlice } from "../api/apiSlice";
 
 interface Todos {
-  id?: string;
-  todo?: string;
-  isChecked?: boolean;
-  [key: string]: unknown;
-}
-
-interface ApiResponse {
-  data: Todos[];
-  [key: string]: unknown;
+  id: string;
+  todo: string;
+  isChecked: boolean;
 }
 
 const todoApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     // get all todos
-    getTodos: builder.query<Todos[], void>({
+    getTodos: builder.query({
       query: () => "/todos",
       transformResponse: (response: Todos[]) => {
         return response.slice().reverse();
@@ -23,7 +17,7 @@ const todoApi = apiSlice.injectEndpoints({
     }),
 
     // add new todo
-    addTodo: builder.mutation<ApiResponse, Partial<Todos>>({
+    addTodo: builder.mutation({
       query: (body) => ({
         url: "/todos",
         method: "POST",

@@ -6,7 +6,7 @@ import TodoItem from "./todoItem";
 type Props = {};
 
 export default function TodoList({}: Props) {
-  const { data: todos, isLoading, isError } = useGetTodosQuery();
+  const { data: todos, isLoading, isError } = useGetTodosQuery(undefined);
 
   if (isLoading) {
     return <p className=" text-center">Loading...</p>;
